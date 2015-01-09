@@ -35,5 +35,27 @@ cacheSolve <- function(x, ...) {
 
 
 
+## Include some minimum reproducible examples
+
+
+# Test matrix
+m <- 1024
+sm <- matrix(sample(1:(m*m)), ncol=m)
+cached <- makeCacheMatrix(sm)
+
+# Compare times
+system.time(solve(sm))
+system.time(cacheSolve(cached))
+system.time(cacheSolve(cached))
+
+
+# Modify the matrix
+cached$set(solve(sm))
+
+# Solve
+system.time(cacheSolve(cached))
+system.time(cacheSolve(cached))
+
+
 
 # End of script
